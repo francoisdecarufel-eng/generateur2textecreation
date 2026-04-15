@@ -55,7 +55,7 @@
 
         const ECHELONS_PFEQ = [
           { id: 1, cycles: ['Cycle 1'], label: "Échelon 1 : (cycle 1)", description: "L’élève fait semblant de lire lorsqu’il feuillette un livre. Il parvient à se le raconter intérieurement ou à le raconter à autrui en s’appuyant notamment sur les illustrations. Dans les textes qu’il aborde, il reconnaît quelques mots familiers ou déjà vus en classe. Il réussit à suivre des consignes simples comprenant surtout des mots connus. Il cherche aussi à donner du sens aux écrits qu’il rencontre autour de lui et il en parle volontiers." },
-          { id: 2, cycles: ['Cycle 1'], label: "Échelon 2 : (Cycle 1)", description: "L’élève lit des petits messages ou des textes courts, simples et illustrés constitués majoritairement de mots familiers et d’usage fréquent. Afin de construire du sens, il utilise, avec de l’aide, des stratégies de reconnaissance et d’identification de mots telles que les correspondances entre les lettres et les sons ainsi que le recours au contexte et aux illustrations. Il parvient à accomplir des tâches très simples liées à diverses intentions de lecture. Il réagit au texte dans la mesure où il est sollicité." },
+          { id: 2, cycles: ['Cycle 1'], label: "Échelon 2 : (Cycle 1)", description: "L’élève lit des petits messages ou des textes courts, simples et illustrés constitués majoritairement de mots familiers et d’usage fréquent. Afin de construire du sens, il utilise, avec de l’aide, des stratégies de reconnaissance et d’identification de mots telles que les correspondances entre les lettres et les sons ainsi que le recours au contexte et aux illustrations. Il parvient à accomplir des tâches très simples liées à diverse intentions de lecture. Il réagit au texte dans la mesure où il est sollicité." },
           { id: 3, cycles: ['Cycle 1'], label: "Échelon 3 : (Cycle 1)", description: "L’élève lit des textes courants et littéraires, simples et illustrés, dont la structure est généralement prévisible. Pour comprendre l’essentiel d’un texte, il utilise les stratégies appropriées et rappelées par l’enseignant. Lorsqu’il accomplit des tâches simples liées à diverses intentions de lecture, il dégage les informations explicites nécessaires. Quand il réagit au texte, il exprime ses réactions en ayant recours surtout au dessin ou à la parole." },
           { id: 4, cycles: ['Cycle 1', 'Cycle 2'], label: "Échelon 4 : (Fin cycle 1 / début cycle 2)", description: "L’élève lit des textes courants et littéraires généralement courts, illustrés et présentant un niveau de difficulté approprié. Afin de comprendre les textes qu’il lit, l’élève a recours aux principales stratégies apprises. Lorsqu’il accomplit des tâches liées à diverses intentions de lecture, il dégage la plupart des informations explicites contenues dans un ou plusieurs courts textes. De façon générale, il réagit spontanément aux textes et ses réactions, souvent liées à ses expériences personnelles, peuvent se manifester par le recours à la parole, au dessin, au mime, au non verbal et quelquefois à l’écrit." },
           { id: 5, cycles: ['Cycle 2'], label: "Échelon 5 : (Cycle 2)", description: "L’élève lit des textes courants et littéraires, proposant un défi approprié, généralement illustrés et présentés sur différents supports médiatiques. Il utilise la plupart des stratégies auxquelles il a été initié pour comprendre les textes. Lorsqu’il accomplit des tâches liées à diverses intentions de lecture, il dégage les éléments d’information explicites et, à l’occasion, certains éléments d’information implicites liés à ses connaissances et à ses expériences personnelles. Il réagit aux textes qu’il lit et ses réactions, orales et parfois écrites, s’appuient aussi sur ses expériences personnelles." },
@@ -1182,7 +1182,7 @@
                                 const isChecked = formData.theme.includes(t);
                                 return (
                                   <label key={t} className={`cursor-pointer border-2 rounded-xl p-3 flex items-center justify-center min-h-[3.5rem] text-center transition-all font-bold break-words leading-tight ${isChecked ? 'border-indigo-500 bg-indigo-50 text-indigo-900 scale-[1.03] shadow-md' : 'border-slate-200 bg-white hover:border-indigo-300 hover:bg-slate-50 text-slate-700'}`}>
-                                    <input type="checkbox" className="sr-only" checked={isChecked} onChange={(e) => handleCheckboxArray('theme', t, e.target.checked)} />
+                                    <input type="checkbox" className="hidden" checked={isChecked} onChange={(e) => handleCheckboxArray('theme', t, e.target.checked)} />
                                     <span className="break-words min-w-0 w-full">{t}</span>
                                   </label>
                                 );
@@ -1654,7 +1654,7 @@
                                   {formData.showCatTraitsSec && (
                                     <div className="p-5 border-t border-slate-200 animate-fade-in bg-slate-50/50">
                                       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                        <div className="p-2">
+                                        <div className="border border-green-200 p-5 rounded-2xl bg-white">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-green-600 focus:ring-green-500 flex-shrink-0" checked={formData.activeTraitsExpSec} onChange={e => handleChange('activeTraitsExpSec', e.target.checked)} />
@@ -1674,7 +1674,7 @@
                                             </>
                                           )}
                                         </div>
-                                        <div className="p-2">
+                                        <div className="border border-blue-200 p-5 rounded-2xl bg-white">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-blue-600 focus:ring-blue-500 flex-shrink-0" checked={formData.activeTraitsImpSec} onChange={e => handleChange('activeTraitsImpSec', e.target.checked)} />
@@ -1708,7 +1708,7 @@
                                   {formData.showCatEmotionsSec && (
                                     <div className="p-5 border-t border-slate-200 animate-fade-in bg-slate-50/50">
                                       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                        <div className="p-2">
+                                        <div className="border border-green-200 p-5 rounded-2xl bg-white">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-green-600 focus:ring-green-500 flex-shrink-0" checked={formData.activeEmotionsExpSec} onChange={e => handleChange('activeEmotionsExpSec', e.target.checked)} />
@@ -1728,7 +1728,7 @@
                                             </>
                                           )}
                                         </div>
-                                        <div className="p-2">
+                                        <div className="border border-blue-200 p-5 rounded-2xl bg-white">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-blue-600 focus:ring-blue-500 flex-shrink-0" checked={formData.activeEmotionsImpSec} onChange={e => handleChange('activeEmotionsImpSec', e.target.checked)} />
@@ -2075,7 +2075,9 @@
 
                       <button 
                         onClick={() => {
-                          setActiveTab(prev => Math.max(1, prev - 1));
+                          let prevId = activeTab - 1;
+                          if (prevId === 6 && formData.typeTexte !== 'Texte narratif') prevId = 5;
+                          setActiveTab(Math.max(1, prevId));
                           if (scrollContainerRef.current) scrollContainerRef.current.scrollTop = 0;
                         }}
                         disabled={activeTab === 1}
@@ -2085,10 +2087,12 @@
                       </button>
                     </div>
                     
-                    {activeTab < 10 ? (
+                    {activeTab < 11 ? (
                       <button 
                         onClick={() => {
-                          setActiveTab(prev => Math.min(10, prev + 1));
+                          let nextId = activeTab + 1;
+                          if (nextId === 6 && formData.typeTexte !== 'Texte narratif') nextId = 7;
+                          setActiveTab(Math.min(11, nextId));
                           if (scrollContainerRef.current) scrollContainerRef.current.scrollTop = 0;
                         }}
                         className="flex items-center gap-3 px-6 md:px-10 py-3 md:py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-black transition-all text-base md:text-lg shadow-xl shadow-indigo-600/20 hover:translate-x-1 hover:shadow-indigo-600/40"
