@@ -391,24 +391,52 @@
             p += `▶ SECTION 1 : TEXTE OBLIGATOIRE (Consignes de rédaction)\n`;
             p += `====================================================\n`;
             
-            p += `Génère une histoire originale de qualité littéraire professionnelle. Le texte doit impérativement être structuré comme une œuvre d’auteur, avec une cohérence narrative parfaite.\n`;
-            p += `L’histoire doit obligatoirement contenir :\n\n`;
-            p += `- Un titre accrocheur et pertinent\n`;
-            p += `- Un début (mise en place du contexte, des personnages et de l’univers)\n`;
-            p += `- Un milieu (développement de l’intrigue avec actions, tensions, événements et évolutions narratives)\n`;
-            p += `- Une fin (résolution cohérente et satisfaisante de l’intrigue)\n\n`;
-            p += `Le récit doit respecter une progression logique, fluide et cohérente du début jusqu’à la fin, sans contradictions internes.\n`;
-            p += `Le style doit être digne d’un auteur publié : riche, maîtrisé, immersif, avec un bon rythme narratif et une construction solide des scènes et des personnages.\n`;
-            p += `Aucune partie de l’histoire ne doit être indépendante : chaque élément doit contribuer à l’évolution globale du récit.\n`;
-            p += `L’ensemble doit form une œuvre complète, structurée et cohérente du point view narratif, émotionnel et logique.\n\n`;
+            if (!formData.typeTexte || formData.typeTexte === 'Texte narratif') {
+              p += `Génère une histoire originale de qualité littéraire professionnelle. Le texte doit impérativement être structuré comme une œuvre d’auteur, avec une cohérence narrative parfaite.\n`;
+              p += `L’histoire doit obligatoirement contenir :\n\n`;
+              p += `- Un titre accrocheur et pertinent\n`;
+              p += `- Un début (mise en place du contexte, des personnages et de l’univers)\n`;
+              p += `- Un milieu (développement de l’intrigue avec actions, tensions, événements et évolutions narratives)\n`;
+              p += `- Une fin (résolution cohérente et satisfaisante de l’intrigue)\n\n`;
+              p += `Le récit doit respecter une progression logique, fluide et cohérente du début jusqu’à la fin, sans contradictions internes.\n`;
+              p += `Le style doit être digne d’un auteur publié : riche, maîtrisé, immersif, avec un bon rythme narratif et une construction solide des scènes et des personnages.\n`;
+              p += `Aucune partie de l’histoire ne doit être indépendante : chaque élément doit contribuer à l’évolution globale du récit.\n`;
+              p += `L’ensemble doit former une œuvre complète, structurée et cohérente du point de vue narratif, émotionnel et logique.\n\n`;
+            } else if (formData.typeTexte === 'Texte descriptif') {
+              p += `Génère un texte descriptif de qualité professionnelle. Le texte doit impérativement être structuré.\n\n`;
+              p += `Le texte descriptif vise à peindre un portrait précis et organisé grâce à des informations pertinentes et à un vocabulaire évocateur. Il peut être objectif (informatif) ou subjectif (impression, appréciation).\n\n`;
+              p += `Caractéristiques essentielles :\n`;
+              p += `- Présente un sujet clairement identifié afin de le décrire (exemple : décrire un personnage d'Halloween, décrire un animal (habitation, alimentation). Il peut s'agir parfois d'une description physique ou d'une description plus générale.\n`;
+              p += `- Regroupe les informations selon une organisation logique (du général au particulier, du haut vers le bas, de l’ensemble vers les détails, etc.).\n`;
+              p += `- Utilise des groupes du nom enrichis, des adjectifs, des compléments, des comparaisons et parfois des images.\n`;
+              p += `- Fait appel aux cinq sens pour rendre la description plus vivante.\n`;
+              p += `- Emploie souvent des temps de l’indicatif (présent, imparfait) pour situer la description.\n`;
+              p += `- Peut intégrer des marqueurs spatiaux (à gauche, au centre, au loin, au sommet, etc.).\n\n`;
+              p += `Intention de communication :\n`;
+              p += `Informer, expliquer, représenter ou faire ressentir afin que le lecteur se fasse une image mentale claire du sujet décrit.\n\n`;
+            } else {
+              p += `Génère un ${formData.typeTexte.toLowerCase()} de qualité professionnelle.\n`;
+              p += `Tu dois impérativement prendre en considération le type de texte sélectionné et adapter la requête en conséquence afin que le résultat final généré soit en lien direct avec le type de texte choisi.\n`;
+              p += `L’ensemble doit former une œuvre complète, structurée et cohérente.\n\n`;
+            }
             p += `----------------------------------------------------\n`;
 
             if (formData.niveau) p += `- Niveau ciblé : ${formData.niveau}\n`;
             
-            if (formData.typeTexte) p += `- Type de texte : ${formData.typeTexte}\n`;
+            if (formData.typeTexte) {
+              p += `- Type de texte : ${formData.typeTexte}\n`;
+              if (formData.typeTexte === 'Texte courant') {
+                p += `  - Des titres significatifs en lien avec les paragraphes présentant les descriptions/informations\n`;
+              }
+            }
             if (formData.sousType && ['Texte narratif', 'Texte descriptif', 'Texte courant'].includes(formData.typeTexte)) {
               p += `  Structure exigée : ${formData.sousType}\n`;
-              p += `  ⚠️ CONSIGNE MÉTA STRICTE : Tu dois structurer le texte selon ce schéma, mais tu ne dois JAMAIS, au grand jamais, écrire les noms des parties du schéma dans le texte final (exemple: interdit d'écrire "Situation de départ", "Élément déclencheur", "Développement", etc.). Le texte doit couler naturellement sans ces intertitres.\n`;
+              if (formData.typeTexte === 'Texte narratif') {
+                p += `  ⚠️ CONSIGNE MÉTA STRICTE : Tu dois structurer le texte selon ce schéma, mais tu ne dois JAMAIS, au grand jamais, écrire les noms des parties du schéma dans le texte final (exemple: interdit d'écrire "Situation de départ", "Élément déclencheur", "Développement", etc.). Le texte doit couler naturellement sans ces intertitres.\n`;
+              }
+              if (formData.typeTexte === 'Texte courant' && formData.sousType === 'Schéma en sous-thèmes') {
+                p += `  ⚠️ CONSIGNE STRICTE : Des titres logiques et représentatifs en lien avec le contenu des paragraphes seront indiqués. Les contenus des différents paragraphes seront en lien direct avec le thème sélectionné afin de bien décrire ce que l'on désire. Exemple : thème choisi (jeux vidéo : exemples de sous-titres : console, rôle des jeux vidéo, manette, temps d'écran raisonnable, bienfaits, éléments à faire attention (l'IA doit impérativement se servir de son intelligence afin de cibler des sujets (intertitres) variés et intéressants pour des élèves du primaire. Autre exemple : animal de compagnie (l'IA décidera de l'animal si ce n'est pas indiqué ou parlera de plusieurs animaux. Les sous titre pourraient être, alimentation, comment en prendre soin, prix, nourriture, caractéristiques physique.\n`;
+              }
             }
 
             p += `\n⚠️ CONSIGNE STRICTE SUR LES PARAGRAPHES :\n`;
@@ -982,7 +1010,7 @@
                                 {formData.typeTexte === 'Texte descriptif' && ['Schéma en zoom', 'Schéma par catégories'].map(sub => (
                                   <RadioCard key={sub} label={sub} value={sub} current={formData.sousType} onChange={(v) => handleChange('sousType', v)} isSmall />
                                 ))}
-                                {formData.typeTexte === 'Texte courant' && ['Schéma logique (type encyclopédie)', 'Schéma en sous-thèmes (Quoi, Où, Comment)'].map(sub => (
+                                {formData.typeTexte === 'Texte courant' && ['Schéma logique (type encyclopédie)', 'Schéma en sous-thèmes'].map(sub => (
                                   <RadioCard key={sub} label={sub} value={sub} current={formData.sousType} onChange={(v) => handleChange('sousType', v)} isSmall />
                                 ))}
                               </div>
@@ -1654,7 +1682,7 @@
                                   {formData.showCatTraitsSec && (
                                     <div className="p-5 border-t border-slate-200 animate-fade-in bg-slate-50/50">
                                       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                        <div className="border border-green-200 p-5 rounded-2xl bg-white">
+                                        <div className="p-2">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-green-600 focus:ring-green-500 flex-shrink-0" checked={formData.activeTraitsExpSec} onChange={e => handleChange('activeTraitsExpSec', e.target.checked)} />
@@ -1674,7 +1702,7 @@
                                             </>
                                           )}
                                         </div>
-                                        <div className="border border-blue-200 p-5 rounded-2xl bg-white">
+                                        <div className="p-2">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-blue-600 focus:ring-blue-500 flex-shrink-0" checked={formData.activeTraitsImpSec} onChange={e => handleChange('activeTraitsImpSec', e.target.checked)} />
@@ -1708,7 +1736,7 @@
                                   {formData.showCatEmotionsSec && (
                                     <div className="p-5 border-t border-slate-200 animate-fade-in bg-slate-50/50">
                                       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                        <div className="border border-green-200 p-5 rounded-2xl bg-white">
+                                        <div className="p-2">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-green-600 focus:ring-green-500 flex-shrink-0" checked={formData.activeEmotionsExpSec} onChange={e => handleChange('activeEmotionsExpSec', e.target.checked)} />
@@ -1728,7 +1756,7 @@
                                             </>
                                           )}
                                         </div>
-                                        <div className="border border-blue-200 p-5 rounded-2xl bg-white">
+                                        <div className="p-2">
                                           <div className="flex justify-between items-center mb-3">
                                             <label className="flex items-center gap-3 cursor-pointer">
                                               <input type="checkbox" className="w-5 h-5 rounded text-blue-600 focus:ring-blue-500 flex-shrink-0" checked={formData.activeEmotionsImpSec} onChange={e => handleChange('activeEmotionsImpSec', e.target.checked)} />
